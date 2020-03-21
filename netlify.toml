@@ -1,8 +1,12 @@
 [build]
   publish = "build"
   functions = "functions"
-  command = "build"
+  command = "production-build"
 
 [dev]
   # Local dev command. A.k.a npm start
-  command = "yarn start"
+  command = "yarn run start"
+  targetPort = 8080
+  functionsPort = 34567
+  publish = "build"
+  autolaunch = false

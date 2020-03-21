@@ -7,19 +7,19 @@ const client = new faunadb.Client({
   secret: process.env.FAUNADB_SERVER_SECRET,
 });
 
-// TODO find better types
+// TODO find better types for event and context
 
 /* export our lambda function as named "handler" export */
 exports.handler = async (event: any, context: any) => {
   /* parse the string body into a useable JS object */
   const data = JSON.parse(event.body);
-  console.log("Function `todo-create` invoked", data);
-  const todoItem = {
+  console.log("Function `game-create` invoked", data);
+  const gameItem = {
     data: data,
   };
   /* construct the fauna query */
   return client
-    .query(q.Create(q.Ref("classes/todos"), todoItem))
+    .query(q.Create(q.Ref("classes/games"), gameItem))
     .then((response: any) => {
       console.log("success", response);
       /* Success! return the response with statusCode 200 */

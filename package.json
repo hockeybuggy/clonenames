@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "netlify dev",
     "start": "webpack-dev-server --hot",
-    "build": "webpack --production",
+    "production-build": "webpack --production",
     "test": "jest",
     "typecheck": "tsc -p .",
     "format": "prettier --write \"src/**/*.ts*\"",
