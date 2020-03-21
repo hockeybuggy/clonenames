@@ -37,9 +37,15 @@ yarn run typecheck
 ## Approach
 
 
-
 ## Structure
 
+
+### TODO
+
+- Update the saga to not create the game inline (create a service that can create games)
+- After making the call to the API set the game code, and redirect to to the game
+
+- On the game page trigger a fetch if the game hasn't loaded.
 
 ### Things I would consider improving
 
