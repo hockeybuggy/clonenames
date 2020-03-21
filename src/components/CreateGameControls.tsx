@@ -33,7 +33,6 @@ const CreateGameControls: React.FC<{}> = ({}) => {
       <label htmlFor="word-list-input">Word list:</label>
       <textarea
         id="word-list-input"
-        type="text"
         value={wordsListInput}
         onChange={newValue => {
           dispatch({

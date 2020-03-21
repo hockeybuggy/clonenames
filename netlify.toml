@@ -1,0 +1,8 @@
+[build]
+  publish = "build"
+  functions = "functions"
+  command = "build"
+
+[dev]
+  # Local dev command. A.k.a npm start
+  command = "yarn start"

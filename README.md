@@ -16,7 +16,7 @@ yarn install
 To run the application locally:
 
 ```sh
-yarn run start
+yarn run dev
 # The app will start at http://localhost:8080
 ```
 
