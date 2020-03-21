@@ -1,6 +1,7 @@
-import { render, act, fireEvent } from "../testUtils";
+import { render, fireEvent } from "../testUtils";
 import React from "react";
 
+import { DEFAULT_WORD_LIST } from "../constants";
 import CreateGameControls from "./CreateGameControls";
 
 describe("CreateGameControls", () => {
@@ -12,6 +13,36 @@ describe("CreateGameControls", () => {
         "cargo"
       );
       // TODO this test doesn't match the name
+    });
+
+    it("can be changed", () => {
+      const { getByLabelText } = render(<CreateGameControls />);
+
+      const input = getByLabelText("Game Code:") as HTMLInputElement;
+      expect(input.value).not.toEqual("badger");
+
+      fireEvent.change(input, { target: { value: "badger" } });
+
+      expect(input.value).toEqual("badger");
+    });
+  });
+  describe("Word list input", () => {
+    it("defaults to the default english word list", () => {
+      const { getByLabelText } = render(<CreateGameControls />);
+
+      const input = getByLabelText("Word list:") as HTMLInputElement;
+      expect(input.value).toEqual(DEFAULT_WORD_LIST);
+    });
+
+    it("can be changed", () => {
+      const { getByLabelText } = render(<CreateGameControls />);
+
+      const input = getByLabelText("Word list:") as HTMLInputElement;
+      expect(input.value).toEqual(DEFAULT_WORD_LIST);
+
+      fireEvent.change(input, { target: { value: "two, words" } });
+
+      expect(input.value).toEqual("two, words");
     });
   });
 });

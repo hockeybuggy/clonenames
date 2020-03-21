@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "../state/selectors";
 const CreateGameControls: React.FC<{}> = ({}) => {
   const dispatch = useDispatch();
   const gameCodeInput = useSelector(state => state.ui.gameCode);
+  const wordsListInput = useSelector(state => state.ui.wordsList);
   return (
     <div>
       <label htmlFor="game-code-input">Game Code:</label>
@@ -28,7 +29,19 @@ const CreateGameControls: React.FC<{}> = ({}) => {
       >
         Create Game
       </button>
-      <div>word list here</div>
+
+      <label htmlFor="word-list-input">Word list:</label>
+      <textarea
+        id="word-list-input"
+        type="text"
+        value={wordsListInput}
+        onChange={newValue => {
+          dispatch({
+            type: UIActions.UpdateWordsListInput,
+            value: newValue.target.value,
+          });
+        }}
+      />
     </div>
   );
 };

@@ -45,6 +45,8 @@ function uiReducer(state: UIState, action: ActionTypes): UIState {
       return state; // TODO unstub
     case UIActions.UpdateGameCodeInput:
       return { ...state, gameCode: action.value };
+    case UIActions.UpdateWordsListInput:
+      return { ...state, wordsList: action.value };
     default:
       return state;
   }
