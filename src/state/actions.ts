@@ -1,8 +1,10 @@
-import { GameId, Guess, PlayerView, Team } from "./../types";
+import { GameCode, PlayerView, Team } from "./../types";
 
 export enum GameActions {
   LoadGame = "LoadGame",
   CreateGame = "CreateGame",
+  CreateGameLoading = "CreateGameLoading",
+  CreateGameComplete = "CreateGameComplete",
   NewGame = "NewGame",
 }
 
@@ -16,8 +18,8 @@ export enum UIActions {
 }
 
 export type ActionTypes =
-  | { type: GameActions.LoadGame; gameId: GameId }
-  | { type: GameActions.CreateGame; guess: Guess }
+  | { type: GameActions.LoadGame; gameCode: GameCode }
+  | { type: GameActions.CreateGame }
   | { type: UIActions.UpdateGameCodeInput; value: string }
   | { type: UIActions.UpdateWordsListInput; value: string }
   | { type: UIActions.SelectWord; word: string }

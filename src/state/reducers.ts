@@ -16,7 +16,7 @@ export enum GameDataState {
 }
 
 interface GameState {
-  state: GameDataState;
+  loadGame: GameDataState;
   current: Game | null;
 }
 

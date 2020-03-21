@@ -1,11 +1,11 @@
 import React from "react";
 
-import { UIActions } from "../state/actions";
-import { useSelector, useDispatch } from "../state/selectors";
+import { GameActions, UIActions } from "../state/actions";
+import { useSelector, useDispatch, getGameCode } from "../state/selectors";
 
 const CreateGameControls: React.FC<{}> = ({}) => {
   const dispatch = useDispatch();
-  const gameCodeInput = useSelector(state => state.ui.gameCode);
+  const gameCodeInput = useSelector(getGameCode);
   const wordsListInput = useSelector(state => state.ui.wordsList);
   return (
     <div>
@@ -25,6 +25,7 @@ const CreateGameControls: React.FC<{}> = ({}) => {
       <button
         onClick={() => {
           console.log("create game");
+          dispatch({ type: GameActions.CreateGame });
         }}
       >
         Create Game

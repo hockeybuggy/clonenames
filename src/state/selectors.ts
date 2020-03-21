@@ -7,4 +7,6 @@ import { RootState } from "./reducers";
 
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
+export const getGameCode = (state: RootState): string => state.ui.gameCode;
+
 export { useDispatch };

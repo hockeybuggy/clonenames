@@ -1,4 +1,4 @@
-export type GameId = string;
+export type GameCode = string;
 
 export type Team = "red" | "blue";
 export type Faction = "redAgent" | "blueAgent" | "bystander" | "assassin";
@@ -14,6 +14,7 @@ export interface Word {
 }
 
 export interface Game {
+  code: GameCode;
   words: Array<Word>;
   guesses: Array<Guess>;
   currentTurn: Team;

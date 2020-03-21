@@ -10,7 +10,7 @@ const client = new faunadb.Client({
 // TODO find better types for event and context
 
 /* export our lambda function as named "handler" export */
-exports.handler = async (event: any, context: any) => {
+exports.handler = async (event, context) => {
   /* parse the string body into a useable JS object */
   const data = JSON.parse(event.body);
   console.log("Function `game-create` invoked", data);
@@ -20,7 +20,7 @@ exports.handler = async (event: any, context: any) => {
   /* construct the fauna query */
   return client
     .query(q.Create(q.Ref("classes/games"), gameItem))
-    .then((response: any) => {
+    .then(response => {
       console.log("success", response);
       /* Success! return the response with statusCode 200 */
       return {
@@ -28,7 +28,7 @@ exports.handler = async (event: any, context: any) => {
         body: JSON.stringify(response),
       };
     })
-    .catch((error: any) => {
+    .catch(error => {
       console.log("error", error);
       /* Error! return the error with statusCode 400 */
       return {
