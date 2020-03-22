@@ -1,9 +1,39 @@
-import React from "react";
-import { RouteProps } from "react-router";
+import React, { useEffect } from "react";
+
+import { RouteComponentProps } from "react-router";
+
+import { useSelector, useDispatch, getCurrentGame } from "../state/selectors";
+import { GameActions } from "../state/actions";
+import { GameDataState } from "../state/reducers";
+
+import GameBoard from "../components/GameBoard";
 
 type GamePageProps = {};
 
-const GamePage: React.FC<GamePageProps & RouteProps> = ({}) => {
-  return <div>GamePage</div>;
+const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
+  const [loadState, currentGameState] = useSelector(getCurrentGame);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const gameCode = (match.params as { gameCode: string | null })?.gameCode;
+    console.log(gameCode);
+    if (gameCode) {
+      dispatch({ type: GameActions.LoadGame, gameCode: gameCode });
+    }
+  }, []);
+
+  if (loadState != GameDataState.Complete) {
+    return <div>Loading</div>;
+  }
+
+  return (
+    <div>
+      <h1>GamePage</h1>
+      <div>
+        Send this link to your friends
+        <a href={`/${currentGameState.code}`}>Send this link to friends</a>
+        <GameBoard dispatch={dispatch} game={currentGameState} />
+      </div>
+    </div>
+  );
 };
 export default GamePage;

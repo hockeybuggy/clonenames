@@ -1,3 +1,5 @@
+export type Timestamp = number;
+
 export type GameCode = string;
 
 export type Team = "red" | "blue";

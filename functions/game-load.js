@@ -1,6 +1,10 @@
 /* Import faunaDB sdk */
 const faunadb = require("faunadb");
 
+function getGameCode(urlPath) {
+  return urlPath.match(/([^\/]*)\/*$/)[0];
+}
+
 /* configure faunaDB Client with our secret */
 const q = faunadb.query;
 const client = new faunadb.Client({
@@ -10,14 +14,10 @@ const client = new faunadb.Client({
 /* export our lambda function as named "handler" export */
 exports.handler = async (event, context) => {
   /* parse the string body into a useable JS object */
-  const data = JSON.parse(event.body);
-  console.log("Function `game-create` invoked", data);
-  const gameItem = {
-    data: data,
-  };
-  /* construct the fauna query */
+  const gameCode = getGameCode(event.path);
+  console.log("Function `game-load` invoked", gameCode);
   return client
-    .query(q.Create(q.Ref("classes/games"), gameItem))
+    .query(q.Get(q.Match(q.Index("games_by_code"), gameCode)))
     .then(response => {
       console.log("success", response);
       /* Success! return the response with statusCode 200 */

@@ -1,7 +1,9 @@
-import { GameCode, PlayerView, Team } from "./../types";
+import { Game, GameCode, PlayerView, Team } from "./../types";
 
 export enum GameActions {
   LoadGame = "LoadGame",
+  FetchGameLoading = "FetchGameLoading",
+  FetchGameComplete = "FetchGameComplete",
   CreateGame = "CreateGame",
   CreateGameLoading = "CreateGameLoading",
   CreateGameComplete = "CreateGameComplete",
@@ -20,6 +22,12 @@ export enum UIActions {
 export type ActionTypes =
   | { type: GameActions.LoadGame; gameCode: GameCode }
   | { type: GameActions.CreateGame }
+  | { type: GameActions.CreateGameLoading }
+  | { type: GameActions.CreateGameComplete }
+  // TODO make create game preload the game state before redirecting
+  // | { type: GameActions.CreateGameComplete; ts: number; game: Game }
+  | { type: GameActions.FetchGameLoading }
+  | { type: GameActions.FetchGameComplete; ts: number; game: Game }
   | { type: UIActions.UpdateGameCodeInput; value: string }
   | { type: UIActions.UpdateWordsListInput; value: string }
   | { type: UIActions.SelectWord; word: string }

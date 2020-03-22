@@ -9,6 +9,7 @@ interface UIState {
 
 export enum GameDataState {
   Initial = "Initial",
+  CreateGameLoading = "CreateGameLoading",
   Loading = "Loading",
   Updating = "Updating",
   Complete = "Complete",
@@ -16,8 +17,12 @@ export enum GameDataState {
 }
 
 interface GameState {
-  loadGame: GameDataState;
-  current: Game | null;
+  loadState: GameDataState;
+  latestTimestamp: number | null;
+  current: null | {
+    timestamp: number;
+    data: Game;
+  };
 }
 
 export interface RootState {
@@ -31,7 +36,11 @@ export function initializeState(): RootState {
       wordsList: DEFAULT_WORD_LIST,
       gameCode: "cargo", // TODO randomize this
     },
-    game: null,
+    game: {
+      loadState: GameDataState.Initial,
+      latestTimestamp: null,
+      current: null,
+    },
   };
 }
 
@@ -55,9 +64,26 @@ function uiReducer(state: UIState, action: ActionTypes): UIState {
 function gameReducer(state: GameState, action: ActionTypes): GameState {
   switch (action.type) {
     case GameActions.LoadGame:
-      return Object.assign({}, state, { state: GameDataState.Loading });
+      return state; // TODO unstub
     case GameActions.CreateGame:
       return state; // TODO unstub
+    case GameActions.CreateGameLoading:
+      return { ...state, loadState: GameDataState.CreateGameLoading };
+    case GameActions.CreateGameComplete:
+      return state; // TODO unstub
+    case GameActions.FetchGameLoading:
+      return { ...state, loadState: GameDataState.Loading };
+
+    case GameActions.FetchGameComplete:
+      console.log(action);
+      // TODO don't update if the incoming new game state is newer that the latestTimestamp
+
+      return {
+        ...state,
+        loadState: GameDataState.Complete,
+        latestTimestamp: action.ts,
+        current: { timestamp: action.ts, data: action.game },
+      };
     default:
       return state;
   }
