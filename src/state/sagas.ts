@@ -85,6 +85,25 @@ export function* watchNextGame() {
   yield takeEvery(UIActions.NextGame, nextGameAsync);
 }
 
+export function* endTurnAsync(action: { type: UIActions.EndTurn }): any {
+  const [loadState, currentTimestamp, game] = yield select(getCurrentGame);
+  if (loadState == GameDataState.Complete) {
+    const newGame = {
+      ...game,
+      currentTurn: game.currentTurn === "red" ? "blue" : "red",
+    };
+    console.log("Next game");
+    yield put<ActionTypes>({
+      type: GameActions.UpdateGame,
+      ts: currentTimestamp,
+      game: newGame,
+    });
+  }
+}
+export function* watchEndTurn() {
+  yield takeEvery(UIActions.EndTurn, endTurnAsync);
+}
+
 export function* updateGameAsync(action: {
   type: GameActions.UpdateGame;
   ts: Timestamp;
@@ -118,5 +137,6 @@ export default function* rootSaga() {
     watchSelectWord(),
     watchNextGame(),
     watchUpdateGame(),
+    watchEndTurn(),
   ]);
 }

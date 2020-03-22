@@ -8,8 +8,7 @@ body, body > div {
 
 body {
   margin: 0;
-
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   color: #073642;
 

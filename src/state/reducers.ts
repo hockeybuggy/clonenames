@@ -11,6 +11,7 @@ interface UIState {
 export enum GameDataState {
   Initial = "Initial",
   CreateGameLoading = "CreateGameLoading",
+  CreateGameComplete = "CreateGameComplete",
   Loading = "Loading",
   Updating = "Updating",
   Complete = "Complete",
@@ -48,12 +49,8 @@ export function initializeState(): RootState {
 
 function uiReducer(state: UIState, action: ActionTypes): UIState {
   switch (action.type) {
-    case UIActions.SelectWord:
-      return state; // TODO unstub
     case UIActions.ChangePlayerView:
       return { ...state, view: action.view };
-    case UIActions.EndTurn:
-      return state; // TODO unstub
     case UIActions.UpdateGameCodeInput:
       return { ...state, gameCode: action.value };
     case UIActions.UpdateWordsListInput:
@@ -72,13 +69,13 @@ function gameReducer(state: GameState, action: ActionTypes): GameState {
     case GameActions.CreateGameLoading:
       return { ...state, loadState: GameDataState.CreateGameLoading };
     case GameActions.CreateGameComplete:
-      return state; // TODO unstub
+      return { ...state, loadState: GameDataState.CreateGameComplete };
     case GameActions.FetchGameLoading:
       return { ...state, loadState: GameDataState.Loading };
+    case GameActions.UpdateGameLoading:
+      return { ...state, loadState: GameDataState.Updating };
     case GameActions.FetchGameComplete:
     case GameActions.UpdateGameComplete:
-      // TODO don't update if the incoming new game state is newer that the latestTimestamp
-
       return {
         ...state,
         loadState: GameDataState.Complete,

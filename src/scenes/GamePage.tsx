@@ -41,7 +41,13 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
     }
   }, []);
 
-  if (loadState != GameDataState.Complete) {
+  if (
+    !(
+      loadState === GameDataState.Complete ||
+      loadState === GameDataState.Updating
+    )
+  ) {
+    console.log(loadState);
     return <div>Loading</div>;
   }
   if (!currentGameState) {
@@ -69,7 +75,11 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
           game={currentGameState}
         />
         <GameFooterContainer>
-          <p>{currentTimestamp}</p>
+          <p>
+            {loadState === GameDataState.Complete
+              ? currentTimestamp
+              : "Updating"}
+          </p>
           <TogglePlayerView dispatch={dispatch} currentView={currentView} />
           <NextGameButton dispatch={dispatch} />
         </GameFooterContainer>
