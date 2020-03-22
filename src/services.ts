@@ -1,25 +1,6 @@
 import { Game, Guess, Word, Team } from "./types";
 
-function randomChoice<T>(choices: Array<T>): T {
-  // Returns a random element from within the given choices
-  return choices[Math.round(Math.random() * (choices.length - 1))];
-}
-
-function randomBool(): boolean {
-  return Math.random() > 0.5;
-}
-
-function shuffle<T>(list: Array<T>): Array<T> {
-  const a = list.slice(0);
-  var j, x, i;
-  for (i = a.length - 1; i > 0; i--) {
-    j = Math.floor(Math.random() * (i + 1));
-    x = a[i];
-    a[i] = a[j];
-    a[j] = x;
-  }
-  return a;
-}
+import { randomChoice, randomBool, shuffle } from "./utils";
 
 function randomWords(wordsList: Array<string>, firstTurn: Team): Array<Word> {
   const redWords: Array<Word> = Array.from(
@@ -74,11 +55,34 @@ class GameService {
   }
 
   static makeMove(game: Game, guess: Guess): Game {
-    // TODO don't allow the move if already guessed
+    const guessedWord = game.words.find(word => {
+      return word.value === guess.word.value;
+    });
+    console.log("guessedWord", guessedWord);
+    if (guessedWord == undefined) {
+      throw Error("Could not find guessed word.");
+    }
+
+    if (game.guesses.find(aGuess => aGuess.word.value === guessedWord.value)) {
+      throw Error("That word has already been guessed.");
+    }
+
+    let guessIsCorrect =
+      (guessedWord.faction === "redAgent" && game.currentTurn === "red") ||
+      (guessedWord.faction === "blueAgent" && game.currentTurn === "blue");
+    // TODO game over when no more selections for a team
+    // TODO game over when assassin
+
+    const currentTurn = (guessIsCorrect
+      ? game.currentTurn
+      : game.currentTurn == "red"
+      ? "blue"
+      : "red") as Team;
+
     const updatedGame = {
       ...game,
       guesses: [...game.guesses, guess],
-      currentTurn: (game.currentTurn == "red" ? "blue" : "red") as Team,
+      currentTurn: currentTurn,
     };
     return updatedGame;
   }

@@ -1,5 +1,5 @@
 import { GameService } from "./services";
-import { Faction } from "./types";
+import { Team, Faction } from "./types";
 import { DEFAULT_WORD_LIST } from "./constants";
 
 describe("GameService", () => {
@@ -51,33 +51,80 @@ describe("GameService", () => {
   });
 
   describe("makeMove", () => {
-    it("flips the turn to the other team", () => {
-      const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-      const guess = {
-        word: { value: "GOOSE", faction: "redAgent" as Faction },
+    it("flips the turn to the other team if you select one of their words", () => {
+      const game = {
+        ...GameService.create("gcode", DEFAULT_WORD_LIST),
+        currentTurn: "red" as Team,
       };
+      const firstWord = { value: "CEDAR", faction: "blueAgent" as Faction };
+      game.words[0] = firstWord;
+      const guess = { word: firstWord };
 
-      // TODO this isn't correct. It should only flip turns if the guess was in correct
       const newGame = GameService.makeMove(game, guess);
 
       expect(game.code).toEqual("gcode");
-      if (game.currentTurn == "red") {
-        expect(newGame.currentTurn).toEqual("blue");
-      } else {
-        expect(newGame.currentTurn).toEqual("red");
-      }
+      expect(newGame.currentTurn).toEqual("blue");
+    });
+
+    it("does not flip the turn if you select one of your words", () => {
+      const game = {
+        ...GameService.create("gcode", DEFAULT_WORD_LIST),
+        currentTurn: "red" as Team,
+      };
+      const firstWord = { value: "KOFFEE", faction: "redAgent" as Faction };
+      game.words[0] = firstWord;
+      const guess = { word: firstWord };
+
+      const newGame = GameService.makeMove(game, guess);
+
+      expect(game.code).toEqual("gcode");
+      expect(newGame.currentTurn).toEqual("red");
     });
 
     it("adds the guess to the game's list of guesses", () => {
       const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-      const guess = {
-        word: { value: "SALMON", faction: "blueAgent" as Faction },
-      };
+      const firstWord = { value: "Eliza Jane", faction: "redAgent" as Faction };
+      game.words[0] = firstWord;
+      const guess = { word: firstWord };
       expect(game.guesses).toEqual([]);
 
       const newGame = GameService.makeMove(game, guess);
 
       expect(newGame.guesses).toEqual([guess]);
+    });
+
+    describe("invalid moves", () => {
+      it("throws when the word does not exist", () => {
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        const firstWord = { value: "Gus", faction: "redAgent" as Faction };
+        game.words[0] = firstWord;
+        const guess = {
+          word: { value: "Not Gus", faction: "redAgent" as Faction },
+        };
+        expect(game.guesses).toEqual([]);
+
+        expect(() => GameService.makeMove(game, guess)).toThrow(
+          Error("Could not find guessed word.")
+        );
+      });
+
+      it("throws when the word has already geen guessed", () => {
+        // This shouldn't happen normally (since the button is disabled)
+        const firstWord = { value: "Gus", faction: "redAgent" as Faction };
+        const secondWord = { value: "Buck", faction: "redAgent" as Faction };
+        const guess = { word: firstWord };
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        game.words[0] = firstWord;
+        game.words[1] = secondWord;
+        game.guesses.push({ word: secondWord });
+        game.guesses.push(guess);
+
+        expect(game.guesses).toEqual([{ word: secondWord }, guess]);
+
+        expect(() => GameService.makeMove(game, guess)).toThrow(
+          Error("That word has already been guessed.")
+        );
+      });
     });
   });
 });
