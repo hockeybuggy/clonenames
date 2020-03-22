@@ -31,13 +31,11 @@ class API {
     game: Game
   ): Promise<{ ts: Timestamp; game: Game; error: { code: string } }> => {
     // TODO network error handling
-    console.log(timestamp, game);
     const response = await fetch(`/.netlify/functions/game-update`, {
       method: "PUT",
       body: JSON.stringify({ timestamp, game }),
     });
     const response_json = await response.json();
-    console.log(response_json);
     return {
       ts: response_json.ts,
       game: response_json.data,

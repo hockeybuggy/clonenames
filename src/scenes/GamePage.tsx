@@ -47,7 +47,6 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
       loadState === GameDataState.Updating
     )
   ) {
-    console.log(loadState);
     return <div>Loading</div>;
   }
   if (!currentGameState) {

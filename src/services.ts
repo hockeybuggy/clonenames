@@ -9,6 +9,18 @@ function randomBool(): boolean {
   return Math.random() > 0.5;
 }
 
+function shuffle<T>(list: Array<T>): Array<T> {
+  const a = list.slice(0);
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
 function randomWords(wordsList: Array<string>, firstTurn: Team): Array<Word> {
   const redWords: Array<Word> = Array.from(
     Array(firstTurn == "red" ? 9 : 8).keys()
@@ -26,8 +38,13 @@ function randomWords(wordsList: Array<string>, firstTurn: Team): Array<Word> {
   const bystanderWords: Array<Word> = Array.from(Array(7).keys()).map(() => {
     return { value: randomChoice(wordsList), faction: "bystander" };
   });
-  // TODO shuffle words
-  return [...redWords, ...blueWords, ...assassinWords, ...bystanderWords];
+  const unshuffledWords = [
+    ...redWords,
+    ...blueWords,
+    ...assassinWords,
+    ...bystanderWords,
+  ];
+  return shuffle(unshuffledWords);
 }
 
 class GameService {

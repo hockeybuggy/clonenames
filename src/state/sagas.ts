@@ -55,7 +55,6 @@ export function* makeMoveAsync(action: {
   const [loadState, currentTimestamp, game] = yield select(getCurrentGame);
   if (loadState == GameDataState.Complete) {
     const newGame = GameService.makeMove(game, { word: action.word });
-    console.log(newGame);
     yield put<ActionTypes>({
       type: GameActions.UpdateGame,
       ts: currentTimestamp,
@@ -73,7 +72,6 @@ export function* nextGameAsync(action: { type: UIActions.NextGame }): any {
   if (loadState == GameDataState.Complete) {
     const wordsList = yield select(getWordsList);
     const newGame = GameService.reset(game, wordsList);
-    console.log("Next game");
     yield put<ActionTypes>({
       type: GameActions.UpdateGame,
       ts: currentTimestamp,
@@ -92,7 +90,6 @@ export function* endTurnAsync(action: { type: UIActions.EndTurn }): any {
       ...game,
       currentTurn: game.currentTurn === "red" ? "blue" : "red",
     };
-    console.log("Next game");
     yield put<ActionTypes>({
       type: GameActions.UpdateGame,
       ts: currentTimestamp,
