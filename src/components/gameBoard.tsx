@@ -23,7 +23,6 @@ const GameBoard: React.FC<{
   dispatch: Dispatch<ActionTypes>;
   game: Game;
 }> = ({ game, dispatch }) => {
-  console.log(game);
   return (
     <div>
       {game.words.map(word => {
