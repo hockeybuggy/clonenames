@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Game } from "../types";
 
-const StoreContainer = styled.div`
+const ScoreContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -41,19 +41,19 @@ const Score: React.FC<{
   const remainingBlue = (factionCount as any)["blueAgent-unguessed"] as number;
   if (numberOfRedAgent > numberOfBlueAgent) {
     return (
-      <StoreContainer>
+      <ScoreContainer>
         <RedScore>{remainingRed}</RedScore>
         <span>-</span>
         <BlueScore>{remainingBlue}</BlueScore>
-      </StoreContainer>
+      </ScoreContainer>
     );
   }
   return (
-    <StoreContainer>
+    <ScoreContainer>
       <BlueScore>{remainingBlue}</BlueScore>
       <span>-</span>
       <RedScore>{remainingRed}</RedScore>
-    </StoreContainer>
+    </ScoreContainer>
   );
 };
 

@@ -38,4 +38,4 @@ export type ActionTypes =
   | { type: UIActions.UpdateWordsListInput; value: string }
   | { type: UIActions.SelectWord; word: Word }
   | { type: UIActions.ChangePlayerView; view: PlayerView }
-  | { type: UIActions.EndTurn; team: Team };
+  | { type: UIActions.EndTurn };
