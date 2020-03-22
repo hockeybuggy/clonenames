@@ -33,4 +33,6 @@ describe("GameBoard", () => {
 
     expect(dispatch).toHaveBeenCalledWith({ type: UIActions.SelectWord, word });
   });
+
+  it.todo("disables buttons that have already been guessed");
 });

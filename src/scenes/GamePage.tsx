@@ -7,6 +7,7 @@ import { GameActions } from "../state/actions";
 import { GameDataState } from "../state/reducers";
 
 import GameBoard from "../components/GameBoard";
+import Score from "../components/Score";
 
 type GamePageProps = {};
 
@@ -36,6 +37,7 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
         <p>{currentTimestamp}</p>
         Send this link to your friends
         <a href={`/${currentGameState.code}`}>Send this link to friends</a>
+        <Score game={currentGameState} />
         <GameBoard dispatch={dispatch} game={currentGameState} />
       </div>
     </div>
