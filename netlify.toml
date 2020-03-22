@@ -1,5 +1,5 @@
 [build]
-  publish = "build"
+  publish = "dist"
   functions = "functions"
   command = "production-build"
 
@@ -8,5 +8,5 @@
   command = "yarn run start"
   targetPort = 8080
   functionsPort = 34567
-  publish = "build"
+  publish = "dist"
   autoLaunch = false
