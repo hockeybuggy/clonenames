@@ -2,14 +2,14 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-html, body, body > div {
+body, body > div {
   height: 100%;
 }
 
 body {
   margin: 0;
 
-  font-family: Roboto, mono;
+    font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   color: #073642;
 

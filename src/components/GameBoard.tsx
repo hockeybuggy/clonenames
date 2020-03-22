@@ -20,7 +20,7 @@ const PlayerButton = styled.button`
 `;
 
 const CodeMasterButton = styled.button`
-  background-color: ${props => (props.disabled ? "#eee8d5" : "#fdf6e3")};
+  background-color: ${props => (props.disabled ? "#fdf6e3" : "#eee8d5")};
   color: ${props => props.color};
   border-radius: 5px;
   padding: 0.25rem;

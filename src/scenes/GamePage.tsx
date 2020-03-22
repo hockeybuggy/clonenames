@@ -52,8 +52,12 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
     <Layout>
       <div>
         <h1>Clonenames</h1>
-        Send this link to your friends
-        <a href={`/${currentGameState.code}`}>Send this link to friends</a>
+        <p>
+          Send this link to your friends:
+          <a href={`/${currentGameState.code}`}>
+            https://clonename-hockeybuggy.netlify.com/{currentGameState.code}
+          </a>
+        </p>
         <GameHeaderContainer>
           <Score game={currentGameState} />
           <CurrentTurn game={currentGameState} />
