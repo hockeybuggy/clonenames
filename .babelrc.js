@@ -7,6 +7,7 @@ module.exports = {
         regenerator: true,
       },
     ],
+    "babel-plugin-styled-components",
   ],
   presets: [
     "@babel/preset-env",
