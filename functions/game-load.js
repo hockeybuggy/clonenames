@@ -15,12 +15,10 @@ const client = new faunadb.Client({
 exports.handler = async (event, context) => {
   /* parse the string body into a useable JS object */
   const gameCode = getGameCode(event.path);
-  console.log("Function `game-load` invoked", gameCode);
+  console.log("Function `game-load` invoked. Game code:", gameCode);
   return client
     .query(q.Get(q.Match(q.Index("games_by_code"), gameCode)))
     .then(response => {
-      console.log("success", response);
-      /* Success! return the response with statusCode 200 */
       return {
         statusCode: 200,
         body: JSON.stringify(response),
@@ -28,7 +26,6 @@ exports.handler = async (event, context) => {
     })
     .catch(error => {
       console.log("error", error);
-      /* Error! return the error with statusCode 400 */
       return {
         statusCode: 400,
         body: JSON.stringify(error),
