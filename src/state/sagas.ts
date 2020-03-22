@@ -62,11 +62,27 @@ export function* makeMoveAsync(action: {
       game: newGame,
     });
   }
-  // const { game, ts } = yield call(API.updateGame, gameCode, );
 }
 
 export function* watchSelectWord() {
   yield takeEvery(UIActions.SelectWord, makeMoveAsync);
+}
+
+export function* nextGameAsync(action: { type: UIActions.NextGame }): any {
+  const [loadState, currentTimestamp, game] = yield select(getCurrentGame);
+  if (loadState == GameDataState.Complete) {
+    const wordsList = yield select(getWordsList);
+    const newGame = GameService.reset(game, wordsList);
+    console.log("Next game");
+    yield put<ActionTypes>({
+      type: GameActions.UpdateGame,
+      ts: currentTimestamp,
+      game: newGame,
+    });
+  }
+}
+export function* watchNextGame() {
+  yield takeEvery(UIActions.NextGame, nextGameAsync);
 }
 
 export function* updateGameAsync(action: {
@@ -91,6 +107,7 @@ export function* updateGameAsync(action: {
 }
 
 export function* watchUpdateGame() {
+  // TODO Take latest?
   yield takeEvery(GameActions.UpdateGame, updateGameAsync);
 }
 
@@ -99,6 +116,7 @@ export default function* rootSaga() {
     watchCreateGame(),
     watchLoadGame(),
     watchSelectWord(),
+    watchNextGame(),
     watchUpdateGame(),
   ]);
 }

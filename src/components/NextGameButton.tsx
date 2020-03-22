@@ -7,13 +7,15 @@ const NextGameButton: React.FC<{
   dispatch: Dispatch<ActionTypes>;
 }> = ({ dispatch }) => {
   return (
-    <button
-      onClick={() => {
-        dispatch({ type: UIActions.NextGame });
-      }}
-    >
-      Next game
-    </button>
+    <div>
+      <button
+        onClick={() => {
+          dispatch({ type: UIActions.NextGame });
+        }}
+      >
+        Next game
+      </button>
+    </div>
   );
 };
 

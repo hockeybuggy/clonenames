@@ -11,7 +11,8 @@ const client = new faunadb.Client({
 exports.handler = async (event, context) => {
   /* parse the string body into a useable JS object */
   const data = JSON.parse(event.body);
-  console.log("Function `game-update` invoked", data);
+  // TODO setup structured logging
+  console.log("Function `game-update` invoked", data.timestamp, data.game.code);
   const { timestamp, game } = data;
   /* construct the fauna query */
   const queryByGameCode = q.Get(q.Match(q.Index("games_by_code"), game.code));
@@ -28,7 +29,6 @@ exports.handler = async (event, context) => {
   return client
     .query(query)
     .then(response => {
-      console.log("success", response);
       if (response.error === "Conflict") {
         return {
           statusCode: 409,

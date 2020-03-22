@@ -65,6 +65,10 @@ class GameService {
     };
     return updatedGame;
   }
+
+  static reset(game: Game, wordsList: string): Game {
+    return GameService.create(game.code, wordsList);
+  }
 }
 
 export { GameService };

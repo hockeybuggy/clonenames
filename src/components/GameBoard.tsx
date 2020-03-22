@@ -37,7 +37,8 @@ const WordButton: React.FC<{
 
 const BoardContainer = styled.div`
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px;
+  grid-template-columns: repeat(5, 18vw);
+  grid-template-rows: repeat(5, 16vw);
   grid-gap: 10px;
   background-color: #fff;
   color: #444;

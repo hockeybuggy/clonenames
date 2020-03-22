@@ -11,6 +11,7 @@ import {
 import { GameActions } from "../state/actions";
 import { GameDataState } from "../state/reducers";
 
+import Layout from "../components/Layout";
 import GameBoard from "../components/GameBoard";
 import Score from "../components/Score";
 import CurrentTurn from "../components/CurrentTurn";
@@ -48,10 +49,9 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
   }
 
   return (
-    <div>
+    <Layout>
       <h1>Clonenames</h1>
       <div>
-        <p>{currentTimestamp}</p>
         Send this link to your friends
         <a href={`/${currentGameState.code}`}>Send this link to friends</a>
         <GameHeaderContainer>
@@ -61,11 +61,12 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
         </GameHeaderContainer>
         <GameBoard dispatch={dispatch} game={currentGameState} />
         <GameFooterContainer>
+          <p>{currentTimestamp}</p>
           <TogglePlayerView dispatch={dispatch} currentView={currentView} />
           <NextGameButton dispatch={dispatch} />
         </GameFooterContainer>
       </div>
-    </div>
+    </Layout>
   );
 };
 export default GamePage;
