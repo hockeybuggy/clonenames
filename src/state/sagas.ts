@@ -83,10 +83,9 @@ export function* updateGameAsync(action: {
   );
   if (error) {
     // TODO catch error conflict
-    console.log(error);
+    console.log("Error in update", error);
   } else {
     // TODO catch error for network
-    console.log(game);
     yield put<ActionTypes>({ type: GameActions.UpdateGameComplete, game, ts });
   }
 }

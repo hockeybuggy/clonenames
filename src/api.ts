@@ -16,11 +16,9 @@ class API {
     code: GameCode
   ): Promise<{ ts: Timestamp; game: Game }> => {
     // TODO error handling
-    console.log(code);
     const response = await fetch(`/.netlify/functions/game-load/${code}`, {
       method: "GET",
     });
-    console.log(response);
     const response_json = await response.json();
     return {
       ts: response_json.ts,
@@ -38,7 +36,6 @@ class API {
       method: "PUT",
       body: JSON.stringify({ timestamp, game }),
     });
-    console.log(response);
     const response_json = await response.json();
     console.log(response_json);
     return {

@@ -17,7 +17,9 @@ exports.handler = async (event, context) => {
   const queryByGameCode = q.Get(q.Match(q.Index("games_by_code"), game.code));
   const queryUpdateIfUpToDate = q.If(
     q.Equals(timestamp, q.Select("ts", queryByGameCode)),
-    q.Update(q.Ref("classes/games"), { data: game }),
+    q.Update(q.Select("ref", queryByGameCode), {
+      data: game,
+    }),
     { error: "Conflict" }
   );
 

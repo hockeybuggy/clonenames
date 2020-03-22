@@ -57,6 +57,7 @@ class GameService {
   }
 
   static makeMove(game: Game, guess: Guess): Game {
+    // TODO don't allow the move if already guessed
     const updatedGame = {
       ...game,
       guesses: [...game.guesses, guess],

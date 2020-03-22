@@ -17,7 +17,6 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     const gameCode = (match.params as { gameCode: string | null })?.gameCode;
-    console.log(gameCode);
     if (gameCode) {
       dispatch({ type: GameActions.LoadGame, gameCode: gameCode });
     }
