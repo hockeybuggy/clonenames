@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { RouteComponentProps } from "react-router";
 
-import { useSelector, useDispatch, getCurrentGame } from "../state/selectors";
+import {
+  useSelector,
+  useDispatch,
+  getCurrentGame,
+  getCurrentPlayerView,
+} from "../state/selectors";
 import { GameActions } from "../state/actions";
 import { GameDataState } from "../state/reducers";
 
@@ -10,6 +15,8 @@ import GameBoard from "../components/GameBoard";
 import Score from "../components/Score";
 import CurrentTurn from "../components/CurrentTurn";
 import EndTurnButton from "../components/EndTurnButton";
+import TogglePlayerView from "../components/TogglePlayerView";
+import NextGameButton from "../components/NextGameButton";
 
 type GamePageProps = {};
 
@@ -18,11 +25,13 @@ const GameHeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+const GameFooterContainer = GameHeaderContainer;
 
 const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
   const [loadState, currentTimestamp, currentGameState] = useSelector(
     getCurrentGame
   );
+  const currentView = useSelector(getCurrentPlayerView);
   const dispatch = useDispatch();
   useEffect(() => {
     const gameCode = (match.params as { gameCode: string | null })?.gameCode;
@@ -51,6 +60,10 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
           <EndTurnButton dispatch={dispatch} game={currentGameState} />
         </GameHeaderContainer>
         <GameBoard dispatch={dispatch} game={currentGameState} />
+        <GameFooterContainer>
+          <TogglePlayerView dispatch={dispatch} currentView={currentView} />
+          <NextGameButton dispatch={dispatch} />
+        </GameFooterContainer>
       </div>
     </div>
   );

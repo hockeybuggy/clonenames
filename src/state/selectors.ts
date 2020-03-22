@@ -4,7 +4,7 @@ import {
   useDispatch,
 } from "react-redux";
 import { GameDataState, RootState } from "./reducers";
-import { Game, Timestamp } from "../types";
+import { PlayerView, Game, Timestamp } from "../types";
 
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
@@ -20,5 +20,8 @@ export const getCurrentGame = (
     state.game.current?.data,
   ];
 };
+
+export const getCurrentPlayerView = (state: RootState): PlayerView =>
+  state.ui.view;
 
 export { useDispatch };

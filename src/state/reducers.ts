@@ -1,10 +1,11 @@
-import { Game } from "./../types";
+import { PlayerView, Game } from "./../types";
 import { DEFAULT_WORD_LIST } from "./../constants";
 import { ActionTypes, UIActions, GameActions } from "./actions";
 
 interface UIState {
   wordsList: string;
   gameCode: string;
+  view: PlayerView;
 }
 
 export enum GameDataState {
@@ -33,6 +34,7 @@ export interface RootState {
 export function initializeState(): RootState {
   return {
     ui: {
+      view: "player" as PlayerView,
       wordsList: DEFAULT_WORD_LIST,
       gameCode: "cargo", // TODO randomize this
     },
@@ -49,7 +51,7 @@ function uiReducer(state: UIState, action: ActionTypes): UIState {
     case UIActions.SelectWord:
       return state; // TODO unstub
     case UIActions.ChangePlayerView:
-      return state; // TODO unstub
+      return { ...state, view: action.view };
     case UIActions.EndTurn:
       return state; // TODO unstub
     case UIActions.UpdateGameCodeInput:

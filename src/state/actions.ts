@@ -10,7 +10,6 @@ export enum GameActions {
   UpdateGame = "UpdateGame",
   UpdateGameLoading = "UpdateGameLoading",
   UpdateGameComplete = "UpdateGameComplete",
-  NewGame = "NewGame",
 }
 
 export enum UIActions {
@@ -38,4 +37,5 @@ export type ActionTypes =
   | { type: UIActions.UpdateWordsListInput; value: string }
   | { type: UIActions.SelectWord; word: Word }
   | { type: UIActions.ChangePlayerView; view: PlayerView }
-  | { type: UIActions.EndTurn };
+  | { type: UIActions.EndTurn }
+  | { type: UIActions.NextGame };
