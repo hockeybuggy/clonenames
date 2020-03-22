@@ -1,4 +1,4 @@
-jest.mock("../api");
+// jest.mock("../api");
 import { render, fireEvent } from "../testUtils";
 import React from "react";
 
@@ -6,7 +6,6 @@ import React from "react";
 import { DEFAULT_WORD_LIST } from "../constants";
 import CreateGameControls from "./CreateGameControls";
 
-// TODO fix missing class transform
 describe("CreateGameControls", () => {
   describe("Game Code input", () => {
     it("defaults to a random word", () => {

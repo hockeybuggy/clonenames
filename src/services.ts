@@ -35,8 +35,6 @@ class GameService {
     const wordsSplit = wordsList.split(",").map(word => word.trim());
     const firstTurn: Team = randomBool() ? "red" : "blue";
 
-    console.log(wordsSplit);
-
     let words;
     let uniqueWords = 0;
     do {

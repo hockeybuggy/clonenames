@@ -1,4 +1,4 @@
-import { Game, GameCode, PlayerView, Team } from "./../types";
+import { Word, Game, GameCode, PlayerView, Team } from "./../types";
 
 export enum GameActions {
   LoadGame = "LoadGame",
@@ -30,6 +30,6 @@ export type ActionTypes =
   | { type: GameActions.FetchGameComplete; ts: number; game: Game }
   | { type: UIActions.UpdateGameCodeInput; value: string }
   | { type: UIActions.UpdateWordsListInput; value: string }
-  | { type: UIActions.SelectWord; word: string }
+  | { type: UIActions.SelectWord; word: Word }
   | { type: UIActions.ChangePlayerView; view: PlayerView }
   | { type: UIActions.EndTurn; team: Team };

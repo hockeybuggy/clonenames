@@ -10,8 +10,7 @@ const WordButton: React.FC<{ word: Word; dispatch: Dispatch<ActionTypes> }> = ({
   return (
     <button
       onClick={() => {
-        console.log("Select a word");
-        // dispatch({ type: UIActions.SelectWord, word });
+        dispatch({ type: UIActions.SelectWord, word });
       }}
     >
       {word.value}
