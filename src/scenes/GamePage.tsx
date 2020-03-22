@@ -11,7 +11,9 @@ import GameBoard from "../components/GameBoard";
 type GamePageProps = {};
 
 const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
-  const [loadState, currentGameState] = useSelector(getCurrentGame);
+  const [loadState, currentTimestamp, currentGameState] = useSelector(
+    getCurrentGame
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     const gameCode = (match.params as { gameCode: string | null })?.gameCode;
@@ -24,11 +26,15 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
   if (loadState != GameDataState.Complete) {
     return <div>Loading</div>;
   }
+  if (!currentGameState) {
+    return;
+  }
 
   return (
     <div>
       <h1>GamePage</h1>
       <div>
+        <p>{currentTimestamp}</p>
         Send this link to your friends
         <a href={`/${currentGameState.code}`}>Send this link to friends</a>
         <GameBoard dispatch={dispatch} game={currentGameState} />

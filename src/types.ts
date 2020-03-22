@@ -7,7 +7,7 @@ export type Faction = "redAgent" | "blueAgent" | "bystander" | "assassin";
 export type PlayerView = "codeMaster" | "player";
 
 export interface Guess {
-  word: string;
+  word: Word;
 }
 
 export interface Word {

@@ -55,6 +55,15 @@ class GameService {
 
     return game;
   }
+
+  static makeMove(game: Game, guess: Guess): Game {
+    const updatedGame = {
+      ...game,
+      guesses: [...game.guesses, guess],
+      currentTurn: (game.currentTurn == "red" ? "blue" : "red") as Team,
+    };
+    return updatedGame;
+  }
 }
 
 export { GameService };

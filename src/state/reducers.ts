@@ -73,8 +73,8 @@ function gameReducer(state: GameState, action: ActionTypes): GameState {
       return state; // TODO unstub
     case GameActions.FetchGameLoading:
       return { ...state, loadState: GameDataState.Loading };
-
     case GameActions.FetchGameComplete:
+    case GameActions.UpdateGameComplete:
       console.log(action);
       // TODO don't update if the incoming new game state is newer that the latestTimestamp
 

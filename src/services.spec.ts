@@ -1,4 +1,5 @@
 import { GameService } from "./services";
+import { Faction } from "./types";
 import { DEFAULT_WORD_LIST } from "./constants";
 
 describe("GameService", () => {
@@ -47,5 +48,36 @@ describe("GameService", () => {
     });
 
     it.todo("throws an error when given a word list too short");
+  });
+
+  describe("makeMove", () => {
+    it("flips the turn to the other team", () => {
+      const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+      const guess = {
+        word: { value: "GOOSE", faction: "redAgent" as Faction },
+      };
+
+      // TODO this isn't correct. It should only flip turns if the guess was in correct
+      const newGame = GameService.makeMove(game, guess);
+
+      expect(game.code).toEqual("gcode");
+      if (game.currentTurn == "red") {
+        expect(newGame.currentTurn).toEqual("blue");
+      } else {
+        expect(newGame.currentTurn).toEqual("red");
+      }
+    });
+
+    it("adds the guess to the game's list of guesses", () => {
+      const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+      const guess = {
+        word: { value: "SALMON", faction: "blueAgent" as Faction },
+      };
+      expect(game.guesses).toEqual([]);
+
+      const newGame = GameService.makeMove(game, guess);
+
+      expect(newGame.guesses).toEqual([guess]);
+    });
   });
 });
