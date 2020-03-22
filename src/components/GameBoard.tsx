@@ -5,14 +5,14 @@ import { Word, Game } from "../types";
 import { ActionTypes, UIActions } from "../state/actions";
 
 const factionColours = {
-  redAgent: "red",
-  blueAgent: "blue",
-  bystander: "#ede2cc",
-  assassin: "#000",
+  redAgent: "#dc322f",
+  blueAgent: "#268bd2",
+  bystander: "#b58900",
+  assassin: "#002b36",
 };
 
 const Button = styled.button`
-  background-color: #444;
+  background-color: #eee8d5;
   color: ${props => props.color};
   border-radius: 5px;
   padding: 20px;
@@ -28,7 +28,7 @@ const WordButton: React.FC<{
       onClick={() => {
         dispatch({ type: UIActions.SelectWord, word });
       }}
-      color={alreadyGuessed ? factionColours[word.faction] : "#fff"}
+      color={alreadyGuessed ? factionColours[word.faction] : "#073642"}
     >
       {word.value}
     </Button>
@@ -40,8 +40,7 @@ const BoardContainer = styled.div`
   grid-template-columns: repeat(5, 18vw);
   grid-template-rows: repeat(5, 16vw);
   grid-gap: 10px;
-  background-color: #fff;
-  color: #444;
+  color: #eee8d5;
 `;
 
 const GameBoard: React.FC<{

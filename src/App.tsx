@@ -26,16 +26,14 @@ const store = createReduxStore();
 
 const App = () => {
   return (
-    <div className="app-container">
-      <ReduxProvider store={store}>
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/:gameCode" component={GamePage} />
-          </Switch>
-        </Router>
-      </ReduxProvider>
-    </div>
+    <ReduxProvider store={store}>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/:gameCode" component={GamePage} />
+        </Switch>
+      </Router>
+    </ReduxProvider>
   );
 };
 

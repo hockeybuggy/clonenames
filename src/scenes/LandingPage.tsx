@@ -9,8 +9,10 @@ type LandingPageProps = { props: {} };
 const LandingPage: React.FC<LandingPageProps & RouteProps> = ({}) => {
   return (
     <Layout>
-      <h1>Clonenames</h1>
-      <CreateGameControls />
+      <div>
+        <h1>Clonenames</h1>
+        <CreateGameControls />
+      </div>
     </Layout>
   );
 };

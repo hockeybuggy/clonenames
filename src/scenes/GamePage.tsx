@@ -50,8 +50,8 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
 
   return (
     <Layout>
-      <h1>Clonenames</h1>
       <div>
+        <h1>Clonenames</h1>
         Send this link to your friends
         <a href={`/${currentGameState.code}`}>Send this link to friends</a>
         <GameHeaderContainer>
