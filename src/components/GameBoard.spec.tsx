@@ -11,7 +11,9 @@ describe("GameBoard", () => {
   it("renders all of the words as buttons", () => {
     const dispatch = jest.fn();
     const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-    const { getByText } = render(<GameBoard game={game} dispatch={dispatch} />);
+    const { getByText } = render(
+      <GameBoard game={game} currentView={"player"} dispatch={dispatch} />
+    );
 
     for (let word of game.words) {
       const wordButton = getByText(word.value);
@@ -22,7 +24,9 @@ describe("GameBoard", () => {
   it("dispatches an action when a word is pressed", () => {
     const dispatch = jest.fn();
     const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-    const { getByText } = render(<GameBoard game={game} dispatch={dispatch} />);
+    const { getByText } = render(
+      <GameBoard game={game} currentView={"player"} dispatch={dispatch} />
+    );
 
     const word = game.words[3];
     const wordButton = getByText(word.value);
@@ -35,4 +39,5 @@ describe("GameBoard", () => {
   });
 
   it.todo("disables buttons that have already been guessed");
+  it.todo("shows the code master what factions are");
 });

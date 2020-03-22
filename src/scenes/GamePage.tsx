@@ -59,7 +59,11 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
           <CurrentTurn game={currentGameState} />
           <EndTurnButton dispatch={dispatch} game={currentGameState} />
         </GameHeaderContainer>
-        <GameBoard dispatch={dispatch} game={currentGameState} />
+        <GameBoard
+          currentView={currentView}
+          dispatch={dispatch}
+          game={currentGameState}
+        />
         <GameFooterContainer>
           <p>{currentTimestamp}</p>
           <TogglePlayerView dispatch={dispatch} currentView={currentView} />
