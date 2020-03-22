@@ -1,7 +1,7 @@
 [build]
   publish = "dist"
   functions = "functions"
-  command = "production-build"
+  command = "yarn run production-build"
 
 [dev]
   # Local dev command. A.k.a npm start
