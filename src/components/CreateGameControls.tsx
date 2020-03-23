@@ -29,7 +29,7 @@ const CreateGameControls: React.FC<{ isLoading: boolean }> = ({
 }) => {
   const dispatch = useDispatch();
   const gameCodeInput = useSelector(getGameCode);
-  const wordsListInput = useSelector(state => state.ui.wordsList);
+  const wordsListInput = useSelector((state) => state.ui.wordsList);
   return (
     <div>
       <InputLabelContainer>
@@ -39,7 +39,7 @@ const CreateGameControls: React.FC<{ isLoading: boolean }> = ({
             id="game-code-input"
             type="text"
             value={gameCodeInput}
-            onChange={newValue => {
+            onChange={(newValue) => {
               dispatch({
                 type: UIActions.UpdateGameCodeInput,
                 value: newValue.target.value,
@@ -63,7 +63,7 @@ const CreateGameControls: React.FC<{ isLoading: boolean }> = ({
         <textarea
           id="word-list-input"
           value={wordsListInput}
-          onChange={newValue => {
+          onChange={(newValue) => {
             dispatch({
               type: UIActions.UpdateWordsListInput,
               value: newValue.target.value,

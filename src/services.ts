@@ -30,7 +30,7 @@ function randomWords(wordsList: Array<string>, firstTurn: Team): Array<Word> {
 
 class GameService {
   static create(gameCode: string, wordsList: string): Game {
-    const wordsSplit = wordsList.split(",").map(word => word.trim());
+    const wordsSplit = wordsList.split(",").map((word) => word.trim());
     // TODO Base this on the words
     const firstTurn: Team = randomBool() ? "red" : "blue";
 
@@ -57,14 +57,16 @@ class GameService {
   }
 
   static makeMove(game: Game, guess: Guess): Game {
-    const guessedWord = game.words.find(word => {
+    const guessedWord = game.words.find((word) => {
       return word.value === guess.word.value;
     });
     if (guessedWord == undefined) {
       throw Error("Could not find guessed word.");
     }
 
-    if (game.guesses.find(aGuess => aGuess.word.value === guessedWord.value)) {
+    if (
+      game.guesses.find((aGuess) => aGuess.word.value === guessedWord.value)
+    ) {
       throw Error("That word has already been guessed.");
     }
 

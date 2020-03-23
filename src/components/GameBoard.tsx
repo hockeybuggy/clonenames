@@ -12,16 +12,16 @@ const factionColours = {
 };
 
 const PlayerButton = styled.button`
-  background-color: ${props => (props.disabled ? "#fdf6e3" : "#eee8d5")};
-  color: ${props => props.color};
+  background-color: ${(props) => (props.disabled ? "#fdf6e3" : "#eee8d5")};
+  color: ${(props) => props.color};
   border-radius: 5px;
   padding: 0.25rem;
   overflow: hidden;
 `;
 
 const CodeMasterButton = styled.button`
-  background-color: ${props => (props.disabled ? "#fdf6e3" : "#eee8d5")};
-  color: ${props => props.color};
+  background-color: ${(props) => (props.disabled ? "#fdf6e3" : "#eee8d5")};
+  color: ${(props) => props.color};
   border-radius: 5px;
   padding: 0.25rem;
   overflow: hidden;
@@ -80,7 +80,7 @@ const GameBoard: React.FC<{
   }, {});
   return (
     <BoardContainer>
-      {game.words.map(word => {
+      {game.words.map((word) => {
         return (
           <WordButton
             key={word.value}

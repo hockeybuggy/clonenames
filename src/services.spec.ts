@@ -96,7 +96,9 @@ describe("GameService", () => {
     describe("ending the game", () => {
       it("does not mark a winner neither team selects their last word", () => {
         const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-        const redWords = game.words.filter(word => word.faction === "redAgent");
+        const redWords = game.words.filter(
+          (word) => word.faction === "redAgent"
+        );
         const wordToGuess = redWords.splice(0, 1)[0];
         game.guesses = [];
         const guess = { word: wordToGuess };
@@ -110,10 +112,12 @@ describe("GameService", () => {
 
       it("marks red as the winner if they guess their last word", () => {
         const game = GameService.create("gcode", DEFAULT_WORD_LIST);
-        const redWords = game.words.filter(word => word.faction === "redAgent");
+        const redWords = game.words.filter(
+          (word) => word.faction === "redAgent"
+        );
         const mostWords = redWords.splice(1);
         const lastWordToGuess = redWords.splice(0, 1)[0];
-        game.guesses = mostWords.map(word => {
+        game.guesses = mostWords.map((word) => {
           return { word: word };
         });
 
@@ -129,11 +133,11 @@ describe("GameService", () => {
       it("marks blue as the winner if they guess their last word", () => {
         const game = GameService.create("gcode", DEFAULT_WORD_LIST);
         const blueWords = game.words.filter(
-          word => word.faction === "blueAgent"
+          (word) => word.faction === "blueAgent"
         );
         const mostWords = blueWords.splice(1);
         const lastWordToGuess = blueWords.splice(0, 1)[0];
-        game.guesses = mostWords.map(word => {
+        game.guesses = mostWords.map((word) => {
           return { word: word };
         });
 
@@ -150,7 +154,7 @@ describe("GameService", () => {
         const game = GameService.create("gcode", DEFAULT_WORD_LIST);
         game.currentTurn = "blue" as Team;
         const assassin = game.words.filter(
-          word => word.faction === "assassin"
+          (word) => word.faction === "assassin"
         )[0];
         const guess = { word: assassin };
 
