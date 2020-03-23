@@ -35,11 +35,18 @@ export interface RootState {
 }
 
 export function initializeState(): RootState {
+  let gameCode;
+  const gameCodeMatch = window.location.pathname.match(/\/(\w+)/);
+  if (gameCodeMatch) {
+    gameCode = gameCodeMatch[1];
+  } else {
+    gameCode = shortid.generate();
+  }
   return {
     ui: {
       view: "player" as PlayerView,
       wordsList: DEFAULT_WORD_LIST,
-      gameCode: shortid.generate(),
+      gameCode: gameCode,
     },
     game: {
       loadState: GameDataState.Initial,
