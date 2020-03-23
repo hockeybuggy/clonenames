@@ -60,7 +60,7 @@
     "regenerator-runtime": "^0.13.3",
     "shortid": "^2.2.15",
     "styled-components": "^5.0.1",
-    "uuid": "^3.3.3"
+    "uuid": "^7.0.2"
   },
   "jest": {
     "setupFilesAfterEnv": [
