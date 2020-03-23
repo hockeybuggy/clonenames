@@ -14,7 +14,9 @@ const BlueTurnContainer = styled.div`
 const CurrentTurn: React.FC<{
   game: Game;
 }> = ({ game }) => {
-  if (game.currentTurn == "red") {
+  if (game.winner !== "NONE") {
+    return <p>Game over</p>;
+  } else if (game.currentTurn == "red") {
     return <RedTurnContainer>Red's turn</RedTurnContainer>;
   }
   return <BlueTurnContainer>Blue's turn</BlueTurnContainer>;

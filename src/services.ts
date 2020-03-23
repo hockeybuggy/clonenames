@@ -31,6 +31,7 @@ function randomWords(wordsList: Array<string>, firstTurn: Team): Array<Word> {
 class GameService {
   static create(gameCode: string, wordsList: string): Game {
     const wordsSplit = wordsList.split(",").map(word => word.trim());
+    // TODO Base this on the words
     const firstTurn: Team = randomBool() ? "red" : "blue";
 
     let words;
@@ -48,7 +49,8 @@ class GameService {
       code: gameCode,
       words: words,
       guesses: [] as Array<Guess>,
-      currentTurn: firstTurn, // Base this on the words
+      currentTurn: firstTurn,
+      winner: "NONE" as "red" | "blue" | "NONE",
     };
 
     return game;
@@ -58,7 +60,6 @@ class GameService {
     const guessedWord = game.words.find(word => {
       return word.value === guess.word.value;
     });
-    console.log("guessedWord", guessedWord);
     if (guessedWord == undefined) {
       throw Error("Could not find guessed word.");
     }
@@ -70,8 +71,41 @@ class GameService {
     let guessIsCorrect =
       (guessedWord.faction === "redAgent" && game.currentTurn === "red") ||
       (guessedWord.faction === "blueAgent" && game.currentTurn === "blue");
-    // TODO game over when no more selections for a team
-    // TODO game over when assassin
+
+    const allGuesses = [...game.guesses, guess];
+
+    const guessedWords = allGuesses.reduce((accum, current) => {
+      (accum as any)[current.word.value] = 1;
+      return accum;
+    }, {});
+
+    const factionCount: object = game.words.reduce((accum, current) => {
+      (accum as any)[current.faction + "-total"] =
+        ((accum as any)[current.faction + "-total"] || 0) + 1;
+      const wordGuessed: boolean =
+        (guessedWords as any)[current.value] !== undefined;
+      (accum as any)[current.faction + "-unguessed"] =
+        ((accum as any)[current.faction + "-unguessed"] || 0) +
+        (wordGuessed ? 0 : 1);
+      return accum;
+    }, {});
+    const allRedWordsGuessed =
+      (factionCount as any)["redAgent-unguessed"] === 0;
+    const allBlueWordsGuessed =
+      (factionCount as any)["blueAgent-unguessed"] === 0;
+
+    let winner = "NONE";
+    if (allRedWordsGuessed) {
+      winner = "red";
+    } else if (allBlueWordsGuessed) {
+      winner = "blue";
+    }
+    const assassinWordGuessed =
+      (factionCount as any)["assassin-unguessed"] === 0;
+
+    if (assassinWordGuessed) {
+      winner = game.currentTurn === "red" ? "blue" : "red";
+    }
 
     const currentTurn = (guessIsCorrect
       ? game.currentTurn
@@ -81,8 +115,9 @@ class GameService {
 
     const updatedGame = {
       ...game,
-      guesses: [...game.guesses, guess],
+      guesses: allGuesses,
       currentTurn: currentTurn,
+      winner: winner,
     };
     return updatedGame;
   }

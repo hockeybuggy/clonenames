@@ -20,4 +20,5 @@ export interface Game {
   words: Array<Word>;
   guesses: Array<Guess>;
   currentTurn: Team;
+  winner: Team | "NONE";
 }

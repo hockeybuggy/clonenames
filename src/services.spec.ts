@@ -93,6 +93,75 @@ describe("GameService", () => {
       expect(newGame.guesses).toEqual([guess]);
     });
 
+    describe("ending the game", () => {
+      it("does not mark a winner neither team selects their last word", () => {
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        const redWords = game.words.filter(word => word.faction === "redAgent");
+        const wordToGuess = redWords.splice(0, 1)[0];
+        game.guesses = [];
+        const guess = { word: wordToGuess };
+
+        expect(game.winner).toEqual("NONE");
+
+        const newGame = GameService.makeMove(game, guess);
+
+        expect(newGame.winner).toEqual("NONE");
+      });
+
+      it("marks red as the winner if they guess their last word", () => {
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        const redWords = game.words.filter(word => word.faction === "redAgent");
+        const mostWords = redWords.splice(1);
+        const lastWordToGuess = redWords.splice(0, 1)[0];
+        game.guesses = mostWords.map(word => {
+          return { word: word };
+        });
+
+        const guess = { word: lastWordToGuess };
+
+        expect(game.winner).toEqual("NONE");
+
+        const newGame = GameService.makeMove(game, guess);
+
+        expect(newGame.winner).toEqual("red");
+      });
+
+      it("marks blue as the winner if they guess their last word", () => {
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        const blueWords = game.words.filter(
+          word => word.faction === "blueAgent"
+        );
+        const mostWords = blueWords.splice(1);
+        const lastWordToGuess = blueWords.splice(0, 1)[0];
+        game.guesses = mostWords.map(word => {
+          return { word: word };
+        });
+
+        const guess = { word: lastWordToGuess };
+
+        expect(game.winner).toEqual("NONE");
+
+        const newGame = GameService.makeMove(game, guess);
+
+        expect(newGame.winner).toEqual("blue");
+      });
+
+      it("marks red as the winner if blue picks the assassin", () => {
+        const game = GameService.create("gcode", DEFAULT_WORD_LIST);
+        game.currentTurn = "blue" as Team;
+        const assassin = game.words.filter(
+          word => word.faction === "assassin"
+        )[0];
+        const guess = { word: assassin };
+
+        expect(game.winner).toEqual("NONE");
+
+        const newGame = GameService.makeMove(game, guess);
+
+        expect(newGame.winner).toEqual("red");
+      });
+    });
+
     describe("invalid moves", () => {
       it("throws when the word does not exist", () => {
         const game = GameService.create("gcode", DEFAULT_WORD_LIST);
