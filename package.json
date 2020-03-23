@@ -6,7 +6,9 @@
     "test": "jest",
     "typecheck": "tsc -p .",
     "format": "prettier --write \"src/**/*.ts*\"",
-    "check-format": "prettier --check \"src/**/*.ts*\""
+    "check-format": "prettier --check \"src/**/*.ts*\"",
+    "generate-bundle-analyzer-stats": "webpack --profile --json > stats.json",
+    "bundle-analyzer": "webpack-bundle-analyzer stats.json"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -36,6 +38,7 @@
     "style-loader": "^1.0.0",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.8.1"
   },

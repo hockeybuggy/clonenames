@@ -1,5 +1,9 @@
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
 module.exports = {
   plugins: [
+    new BundleAnalyzerPlugin(),
     "@babel/plugin-proposal-class-properties",
     [
       "@babel/plugin-transform-runtime",

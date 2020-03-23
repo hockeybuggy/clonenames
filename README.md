@@ -33,6 +33,13 @@ types can be check with:
 yarn run typecheck
 ```
 
+To analyze the generated bundle:
+
+```sh
+yarn run generate-bundle-analyzer-stats
+yarn run bundle-analyzer
+```
+
 
 ## Approach
 
