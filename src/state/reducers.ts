@@ -1,3 +1,5 @@
+import shortid from "shortid";
+
 import { PlayerView, Game } from "./../types";
 import { DEFAULT_WORD_LIST } from "./../constants";
 import { ActionTypes, UIActions, GameActions } from "./actions";
@@ -37,7 +39,7 @@ export function initializeState(): RootState {
     ui: {
       view: "player" as PlayerView,
       wordsList: DEFAULT_WORD_LIST,
-      gameCode: "cargo", // TODO randomize this
+      gameCode: shortid.generate(),
     },
     game: {
       loadState: GameDataState.Initial,
