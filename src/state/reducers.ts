@@ -71,14 +71,15 @@ function uiReducer(state: UIState, action: ActionTypes): UIState {
 
 function gameReducer(state: GameState, action: ActionTypes): GameState {
   switch (action.type) {
-    case GameActions.LoadGame:
-      return state; // TODO unstub
-    case GameActions.CreateGame:
-      return state; // TODO unstub
     case GameActions.CreateGameLoading:
       return { ...state, loadState: GameDataState.CreateGameLoading };
     case GameActions.CreateGameComplete:
-      return { ...state, loadState: GameDataState.CreateGameComplete };
+      return {
+        ...state,
+        loadState: GameDataState.CreateGameComplete,
+        latestTimestamp: action.ts,
+        current: { timestamp: action.ts, data: action.game },
+      };
     case GameActions.FetchGameLoading:
       return { ...state, loadState: GameDataState.Loading };
     case GameActions.UpdateGameLoading:

@@ -24,7 +24,9 @@ const InputLabelContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CreateGameControls: React.FC<{}> = ({}) => {
+const CreateGameControls: React.FC<{ isLoading: boolean }> = ({
+  isLoading,
+}) => {
   const dispatch = useDispatch();
   const gameCodeInput = useSelector(getGameCode);
   const wordsListInput = useSelector(state => state.ui.wordsList);
@@ -46,12 +48,12 @@ const CreateGameControls: React.FC<{}> = ({}) => {
           />
 
           <button
+            disabled={isLoading}
             onClick={() => {
-              console.log("create game");
               dispatch({ type: GameActions.CreateGame });
             }}
           >
-            Create Game
+            {isLoading ? "Creating" : "Create Game"}
           </button>
         </CreateGameContainer>
       </InputLabelContainer>

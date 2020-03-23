@@ -19,13 +19,14 @@ export function* createGameAsync() {
   const gameCode = yield select(getGameCode);
   const wordsList = yield select(getWordsList);
 
-  const game = GameService.create(gameCode, wordsList);
-  console.log(game);
   // TODO catch error for invalid world list
-  yield call(API.createGame, game);
+  const newGame = GameService.create(gameCode, wordsList);
+
+  const { game, ts } = yield call(API.createGame, newGame);
+
   // TODO catch error game already existing
   // TODO catch error for network
-  yield put<ActionTypes>({ type: GameActions.CreateGameComplete });
+  yield put<ActionTypes>({ type: GameActions.CreateGameComplete, game, ts });
 }
 
 export function* watchCreateGame() {
@@ -67,7 +68,7 @@ export function* watchSelectWord() {
   yield takeEvery(UIActions.SelectWord, makeMoveAsync);
 }
 
-export function* nextGameAsync(action: { type: UIActions.NextGame }): any {
+export function* nextGameAsync(): any {
   const [loadState, currentTimestamp, game] = yield select(getCurrentGame);
   if (loadState == GameDataState.Complete) {
     const wordsList = yield select(getWordsList);
@@ -83,7 +84,7 @@ export function* watchNextGame() {
   yield takeEvery(UIActions.NextGame, nextGameAsync);
 }
 
-export function* endTurnAsync(action: { type: UIActions.EndTurn }): any {
+export function* endTurnAsync(): any {
   const [loadState, currentTimestamp, game] = yield select(getCurrentGame);
   if (loadState == GameDataState.Complete) {
     const newGame = {

@@ -8,8 +8,12 @@ class API {
       body: JSON.stringify(game),
       method: "POST",
     });
-    console.log(response);
-    return response.json();
+    const response_json = await response.json();
+    return {
+      ts: response_json.ts,
+      game: response_json.data,
+      error: response_json.error,
+    };
   };
 
   static loadGame = async (
