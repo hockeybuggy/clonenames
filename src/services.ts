@@ -94,7 +94,7 @@ class GameService {
     const allBlueWordsGuessed =
       (factionCount as any)["blueAgent-unguessed"] === 0;
 
-    let winner = "NONE";
+    let winner: "NONE" | "red" | "blue" = "NONE";
     if (allRedWordsGuessed) {
       winner = "red";
     } else if (allBlueWordsGuessed) {
