@@ -1,5 +1,8 @@
 import {
   call,
+  delay,
+  race,
+  take,
   select,
   all,
   put,
@@ -40,13 +43,30 @@ export function* loadGameAsync() {
 
   // TODO catch error for invalid world list
   const { game, ts } = yield call(API.loadGame, gameCode);
-  // TODO catch error game already existing
+  // TODO catch error game not existing
   // TODO catch error for network
   yield put<ActionTypes>({ type: GameActions.FetchGameComplete, game, ts });
+  yield put<ActionTypes>({ type: GameActions.PollGame });
 }
 
 export function* watchLoadGame() {
   yield takeLatest(GameActions.LoadGame, loadGameAsync);
+}
+
+export function* pollTask() {
+  yield put<ActionTypes>({ type: GameActions.FetchGameUpdating });
+  const gameCode = yield select(getGameCode);
+
+  // TODO catch error for invalid world list
+  const { game, ts } = yield call(API.loadGame, gameCode);
+  // TODO catch error for network
+  yield put<ActionTypes>({ type: GameActions.FetchGameComplete, game, ts });
+  yield delay(2000);
+  yield put<ActionTypes>({ type: GameActions.PollGame });
+}
+
+export function* watchPollGame() {
+  yield takeLatest(GameActions.PollGame, pollTask);
 }
 
 export function* makeMoveAsync(action: {
@@ -136,5 +156,6 @@ export default function* rootSaga() {
     watchNextGame(),
     watchUpdateGame(),
     watchEndTurn(),
+    watchPollGame(),
   ]);
 }

@@ -82,6 +82,8 @@ function gameReducer(state: GameState, action: ActionTypes): GameState {
       };
     case GameActions.FetchGameLoading:
       return { ...state, loadState: GameDataState.Loading };
+    case GameActions.FetchGameUpdating:
+      return { ...state, loadState: GameDataState.Updating };
     case GameActions.UpdateGameLoading:
       return { ...state, loadState: GameDataState.Updating };
     case GameActions.FetchGameComplete:

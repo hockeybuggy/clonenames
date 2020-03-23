@@ -4,12 +4,14 @@ export enum GameActions {
   LoadGame = "LoadGame",
   FetchGameLoading = "FetchGameLoading",
   FetchGameComplete = "FetchGameComplete",
+  FetchGameUpdating = "FetchGameUpdating",
   CreateGame = "CreateGame",
   CreateGameLoading = "CreateGameLoading",
   CreateGameComplete = "CreateGameComplete",
   UpdateGame = "UpdateGame",
   UpdateGameLoading = "UpdateGameLoading",
   UpdateGameComplete = "UpdateGameComplete",
+  PollGame = "PollGame",
 }
 
 export enum UIActions {
@@ -26,11 +28,13 @@ export type ActionTypes =
   | { type: GameActions.LoadGame; gameCode: GameCode }
   | { type: GameActions.UpdateGame; ts: Timestamp; game: Game }
   | { type: GameActions.FetchGameLoading }
+  | { type: GameActions.FetchGameUpdating }
   | { type: GameActions.CreateGameLoading }
   | { type: GameActions.UpdateGameLoading }
   | { type: GameActions.UpdateGameComplete; ts: Timestamp; game: Game }
   | { type: GameActions.CreateGameComplete; ts: number; game: Game }
   | { type: GameActions.FetchGameComplete; ts: Timestamp; game: Game }
+  | { type: GameActions.PollGame }
   | { type: UIActions.UpdateGameCodeInput; value: string }
   | { type: UIActions.UpdateWordsListInput; value: string }
   | { type: UIActions.SelectWord; word: Word }
