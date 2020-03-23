@@ -1,6 +1,7 @@
 node_modules
 dist/*
 stats.json
+raw_stats.json
 *.log
 
 .env
