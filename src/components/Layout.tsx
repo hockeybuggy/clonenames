@@ -2,8 +2,12 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-body, body > div {
-  height: 100%;
+body {
+  min-height: 100vh;
+}
+
+body > div {
+  min-height: 100vh;
 }
 
 body {
@@ -11,6 +15,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
   color: #073642;
+  background-color: #fdf6e3;
 
   button {
     font-family: Roboto, mono;
@@ -22,12 +27,11 @@ body {
 `;
 
 const LayoutContainer = styled.div`
-  height: 100%;
+  min-height: 100vh;
+  margin: auto 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  background-color: #fdf6e3;
+  justify-content: space-around;
 `;
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
