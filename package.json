@@ -34,7 +34,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "css-loader": "^3.2.0",
     "fork-ts-checker-webpack-plugin": "^1.5.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^4.0.0",
     "jest": "^24.9.0",
     "netlify-cli": "^2.40.0",
     "prettier": "^1.19.1",
