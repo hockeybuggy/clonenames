@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
 
   return client
     .query(query)
-    .then(response => {
+    .then((response) => {
       if (response.error === "Conflict") {
         return {
           statusCode: 409,
@@ -41,7 +41,7 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(response),
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.log("error", error);
       /* Error! return the error with statusCode 400 */
       return {

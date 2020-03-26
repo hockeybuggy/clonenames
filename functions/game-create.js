@@ -11,21 +11,21 @@ const client = new faunadb.Client({
 exports.handler = async (event, context) => {
   /* parse the string body into a useable JS object */
   const data = JSON.parse(event.body);
-  console.log("Function `game-update` invoked", data.game.code);
+  console.log("Function `game-update` invoked", data.code);
   const gameItem = {
     data: data,
   };
   /* construct the fauna query */
   return client
     .query(q.Create(q.Ref("classes/games"), gameItem))
-    .then(response => {
+    .then((response) => {
       /* Success! return the response with statusCode 200 */
       return {
         statusCode: 200,
         body: JSON.stringify(response),
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.log("error", error);
       /* Error! return the error with statusCode 400 */
       return {

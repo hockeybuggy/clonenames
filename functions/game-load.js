@@ -18,13 +18,13 @@ exports.handler = async (event, context) => {
   console.log("Function `game-load` invoked. Game code:", gameCode);
   return client
     .query(q.Get(q.Match(q.Index("games_by_code"), gameCode)))
-    .then(response => {
+    .then((response) => {
       return {
         statusCode: 200,
         body: JSON.stringify(response),
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.log("error", error);
       return {
         statusCode: 400,
