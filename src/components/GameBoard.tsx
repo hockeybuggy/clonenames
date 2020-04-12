@@ -19,11 +19,11 @@ const PlayerButton = styled.button`
   overflow: hidden;
 `;
 
-const CodeMasterButton = styled.button`
-  background-color: ${(props) => (props.disabled ? "#fdf6e3" : "#eee8d5")};
+const CodeMasterButton = styled.button<{ backgroundColor: string }>`
+  background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
   border-radius: 5px;
-  padding: 0.75vh 0.25vw;
+  padding: 3vw 1.25vh;
   overflow: hidden;
 `;
 
@@ -38,11 +38,11 @@ const WordButton: React.FC<{
   };
 
   if (currentView === "codeMaster") {
-    // color={alreadyGuessed ? factionColours[word.faction] : "#073642"}
     return (
       <CodeMasterButton
         onClick={dispatchSelectWord}
-        color={factionColours[word.faction]}
+        backgroundColor={factionColours[word.faction]}
+        color={word.faction === "assassin" ? "#eee" : "#333"}
         disabled={alreadyGuessed}
       >
         {word.value}
