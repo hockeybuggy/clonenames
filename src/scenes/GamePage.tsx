@@ -21,12 +21,20 @@ import NextGameButton from "../components/NextGameButton";
 
 type GamePageProps = {};
 
+const GamePageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+`;
+
 const GameHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 const GameFooterContainer = GameHeaderContainer;
+const PageFooterContainer = GameHeaderContainer;
 
 const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
   const [loadState, currentTimestamp, currentGameState] = useSelector(
@@ -55,25 +63,35 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
 
   return (
     <Layout>
-      <div>
-        <h1>Clonenames</h1>
-        <p>
-          Send this link to your friends:
-          <a href={`/${currentGameState.code}`}>
-            https://hockeybuggy-clonenames.netlify.com/{currentGameState.code}
-          </a>
-        </p>
-        <GameHeaderContainer>
-          <Score game={currentGameState} />
-          <CurrentTurn game={currentGameState} />
-          <EndTurnButton dispatch={dispatch} game={currentGameState} />
-        </GameHeaderContainer>
-        <GameBoard
-          currentView={currentView}
-          dispatch={dispatch}
-          game={currentGameState}
-        />
-        <GameFooterContainer>
+      <GamePageContainer>
+        <div>
+          <h1>Clonenames</h1>
+          <p>
+            Send this link to your friends:
+            <a href={`/${currentGameState.code}`}>
+              https://hockeybuggy-clonenames.netlify.com/{currentGameState.code}
+            </a>
+          </p>
+        </div>
+
+        <div>
+          <GameHeaderContainer>
+            <Score game={currentGameState} />
+            <CurrentTurn game={currentGameState} />
+            <EndTurnButton dispatch={dispatch} game={currentGameState} />
+          </GameHeaderContainer>
+          <GameBoard
+            currentView={currentView}
+            dispatch={dispatch}
+            game={currentGameState}
+          />
+          <GameFooterContainer>
+            <TogglePlayerView dispatch={dispatch} currentView={currentView} />
+            <NextGameButton dispatch={dispatch} />
+          </GameFooterContainer>
+        </div>
+
+        <PageFooterContainer>
           <p>
             {loadState === GameDataState.Complete ? (
               <span title={`Current game timestamp: ${currentTimestamp}`}>
@@ -83,10 +101,16 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
               <span title="Updating">🟡</span>
             )}
           </p>
-          <TogglePlayerView dispatch={dispatch} currentView={currentView} />
-          <NextGameButton dispatch={dispatch} />
-        </GameFooterContainer>
-      </div>
+
+          <p>
+            Created by{" "}
+            <a href="https://twitter.com/hockeybuggy">@hockeybuggy</a>◆
+            <a href="https://github.com/hockeybuggy/clonenames/">
+              GitHub source
+            </a>
+          </p>
+        </PageFooterContainer>
+      </GamePageContainer>
     </Layout>
   );
 };
