@@ -1,7 +1,25 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
+const breakPointSmall = "400px";
+const breakPointMedium = "600px";
 const GlobalStyle = createGlobalStyle`
+html {
+  font-size: 12px;
+}
+
+@media (min-width: ${breakPointSmall}) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: ${breakPointMedium}) {
+  html {
+    font-size: 20px;
+  }
+}
+
 body {
   min-height: 100vh;
 }
@@ -13,17 +31,20 @@ body > div {
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.2rem;
   color: #073642;
   background-color: #fdf6e3;
 
   button {
     font-family: Roboto, mono;
-    font-size: 1.2rem;
-    overflow: wrap;
+    font-weight: 400;
+  }
+
+  @media (min-width: ${breakPointMedium}) {
+    button {
+      font-size: 1.0rem;
+    }
   }
 }
-
 `;
 
 const LayoutContainer = styled.div`

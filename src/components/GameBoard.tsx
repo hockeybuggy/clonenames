@@ -15,7 +15,7 @@ const PlayerButton = styled.button`
   background-color: ${(props) => (props.disabled ? "#fdf6e3" : "#eee8d5")};
   color: ${(props) => props.color};
   border-radius: 5px;
-  padding: 0.25rem;
+  padding: 3vw 1.25vh;
   overflow: hidden;
 `;
 
@@ -23,7 +23,7 @@ const CodeMasterButton = styled.button`
   background-color: ${(props) => (props.disabled ? "#fdf6e3" : "#eee8d5")};
   color: ${(props) => props.color};
   border-radius: 5px;
-  padding: 0.25rem;
+  padding: 0.75vh 0.25vw;
   overflow: hidden;
 `;
 
