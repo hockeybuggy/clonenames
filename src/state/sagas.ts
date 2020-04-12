@@ -61,7 +61,7 @@ export function* pollTask() {
   const { game, ts } = yield call(API.loadGame, gameCode);
   // TODO catch error for network
   yield put<ActionTypes>({ type: GameActions.FetchGameComplete, game, ts });
-  yield delay(2000);
+  yield delay(20000);
   yield put<ActionTypes>({ type: GameActions.PollGame });
 }
 

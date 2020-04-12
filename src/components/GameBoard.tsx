@@ -63,9 +63,9 @@ const WordButton: React.FC<{
 
 const BoardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 18vw);
-  grid-template-rows: repeat(5, 16vw);
-  grid-gap: 10px;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(5, auto);
+  grid-gap: 0.25rem;
   color: #eee8d5;
 `;
 

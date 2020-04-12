@@ -75,9 +75,13 @@ const GamePage: React.FC<GamePageProps & RouteComponentProps> = ({ match }) => {
         />
         <GameFooterContainer>
           <p>
-            {loadState === GameDataState.Complete
-              ? currentTimestamp
-              : "Updating"}
+            {loadState === GameDataState.Complete ? (
+              <span title={`Current game timestamp: ${currentTimestamp}`}>
+                🟢
+              </span>
+            ) : (
+              <span title="Updating">🟡</span>
+            )}
           </p>
           <TogglePlayerView dispatch={dispatch} currentView={currentView} />
           <NextGameButton dispatch={dispatch} />
