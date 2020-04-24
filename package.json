@@ -29,7 +29,7 @@
     "@types/react-router-dom": "^5.1.4",
     "@types/shortid": "^0.0.29",
     "@types/styled-components": "^5.1.0",
-    "@types/uuid": "^7.0.2",
+    "@types/uuid": "^7.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.7",
     "css-loader": "^3.5.2",
