@@ -21,7 +21,7 @@
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^11.2.2",
     "@types/classnames": "^2.2.9",
-    "@types/history": "^4.7.7",
+    "@types/history": "^4.7.9",
     "@types/jest": "^26.0.24",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^16.9.8",
