@@ -49,7 +49,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.6.5",
     "faunadb": "^2.14.2",
-    "react": "^16.12.0",
+    "react": "^16.14.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.13.0",
     "react-is": "^16.13.1",
