@@ -59,7 +59,7 @@
     "redux-saga": "^1.2.1",
     "regenerator-runtime": "^0.13.9",
     "shortid": "^2.2.16",
-    "styled-components": "^5.3.5",
+    "styled-components": "^5.3.6",
     "uuid": "^8.3.2"
   },
   "jest": {
